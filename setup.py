@@ -1,6 +1,8 @@
+#!/usr/bin/env python3
+
 import random
 
-from model import db, Donor, Donation 
+from model import db, Donor, Donation
 
 db.connect()
 
