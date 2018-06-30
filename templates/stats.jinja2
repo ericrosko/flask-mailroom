@@ -1,0 +1,21 @@
+{% extends 'base.jinja2' %}
+
+{% block subtitle %}Stats{% endblock subtitle %}
+
+{% block content %}
+{% if debug != "" %} <br /> </br> {{ debug }} {% else %} {% endif %}
+<h3>Total Donations</h3>
+<ul>
+    {% for total in totals %}
+        <li><b>{{ total }}</b>: {{ totals[total] }}</li>
+    {% endfor %}
+</ul>
+
+<h3>Total Sums of Donations</h3>
+<ul>
+    {% for donor_sum in donor_sums %}
+        <li><b>{{ donor_sum }}</b>: {{ donor_sums[donor_sum] }}</li>
+    {% endfor %}
+</ul>
+
+{% endblock content %}

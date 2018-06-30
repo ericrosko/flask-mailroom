@@ -67,6 +67,33 @@ def add_donation():
     return render_template('add.jinja2', msg=msg)
 
 
+@app.route('/stats')
+def show_stats():
+
+    d = dict()
+
+    donor_sums = dict()
+
+    donors = Donor.select()
+
+    debug = ""
+
+    for x in donors:
+        d[x.name] = 0
+        donor_sums[x.name] = 0
+
+        # oddly, this does not work
+        # donation = Donation.select().where(Donation.donor.name == "Alice")
+        # debug += str(donation.count())
+
+    donations = Donation.select()
+    for donation in donations:
+        # debug += str(donation.donor.name)
+        d[donation.donor.name] += 1
+        donor_sums[donation.donor.name] += int(donation.value)
+
+    return render_template('stats.jinja2', totals=d, debug=debug, donor_sums=donor_sums)
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 6738))
     app.run(host='0.0.0.0', port=port)
